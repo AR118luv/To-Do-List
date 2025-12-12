@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="text-center">
+                <div class="text-6xl mb-2 bounce">👤</div>
+                <h1 class="text-4xl font-bold text-white mb-2 fade-in">Your Profile</h1>
+                <p class="text-indigo-100 fade-in">Personalize your to-do experience! ✨</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-indigo-700 shadow-md">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-center space-x-8 py-4">
+                <a href="index.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg" aria-label="Home">
+                    🏠 Home
+                </a>
+                <a href="about.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg" aria-label="About">
+                    ℹ️ About
+                </a>
+                <a href="profile.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg active" aria-label="Profile">
+                    👤 Profile
+                </a>
+                <a href="contact.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg" aria-label="Contact">
+                    📧 Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-2xl mx-auto px-4 py-8">
+        <div class="gradient-card rounded-xl shadow-lg p-8 hover-lift">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">👤</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Your Profile</h2>
+                <p class="text-lg text-gray-600">Personalize your to-do experience! ✨</p>
+            </div>
+
+            <!-- Profile Form -->
+            <form id="profileForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="userName" class="block text-sm font-medium text-gray-700 mb-2">👋 Your Name</label>
+                        <input 
+                            type="text" 
+                            id="userName" 
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                            placeholder="Enter your name"
+                        >
+                    </div>
+                    <div>
+                        <label for="userEmail" class="block text-sm font-medium text-gray-700 mb-2">📧 Email (Optional)</label>
+                        <input 
+                            type="email" 
+                            id="userEmail" 
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                            placeholder="your@email.com"
+                        >
+                    </div>
+                </div>
+
+                <div>
+                    <label for="userAvatar" class="block text-sm font-medium text-gray-700 mb-2">🎭 Choose Your Avatar</label>
+                    <div class="grid grid-cols-6 gap-3">
+                        <button type="button" class="avatar-btn text-3xl p-3 rounded-lg border-2 border-gray-200 hover:border-indigo-500 transition-all duration-300" data-avatar="👤">👤</button>
+                        <button type="button" class="avatar-btn text-3xl p-3 rounded-lg border-2 border-gray-200 hover:border-indigo-500 transition-all duration-300" data-avatar="😊">😊</button>
+                        <button type="button" class="avatar-btn text-3xl p-3 rounded-lg border-2 border-gray-200 hover:border-indigo-500 transition-all duration-300" data-avatar="🚀">🚀</button>
+                        <button type="button" class="avatar-btn text-3xl p-3 rounded-lg border-2 border-gray-200 hover:border-indigo-500 transition-all duration-300" data-avatar="⭐">⭐</button>
+                        <button type="button" class="avatar-btn text-3xl p-3 rounded-lg border-2 border-gray-200 hover:border-indigo-500 transition-all duration-300" data-avatar="🎯">🎯</button>
+                        <button type="button" class="avatar-btn text-3xl p-3 rounded-lg border-2 border-gray-200 hover:border-indigo-500 transition-all duration-300" data-avatar="💼">💼</button>
+                    </div>
+                    <input type="hidden" id="selectedAvatar" value="👤">
+                </div>
+
+                <div>
+                    <label for="userTheme" class="block text-sm font-medium text-gray-700 mb-2">🎨 Preferred Theme</label>
+                    <select 
+                        id="userTheme" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                    >
+                        <option value="default">🌈 Default (Blue & Purple)</option>
+                        <option value="green">🌿 Nature (Green)</option>
+                        <option value="orange">🔥 Energy (Orange)</option>
+                        <option value="pink">🌸 Soft (Pink)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">⚙️ Preferences</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="showWelcome" class="rounded text-indigo-600 focus:ring-indigo-500" checked>
+                            <span class="ml-2 text-gray-700">Show welcome message</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="soundNotifications" class="rounded text-indigo-600 focus:ring-indigo-500">
+                            <span class="ml-2 text-gray-700">Enable sound notifications (Demo)</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="autoSave" class="rounded text-indigo-600 focus:ring-indigo-500" checked>
+                            <span class="ml-2 text-gray-700">Auto-save changes</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 pt-4">
+                    <button 
+                        type="submit" 
+                        class="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-medium button-bounce"
+                    >
+                        💾 Save Profile
+                    </button>
+                    <button 
+                        type="button" 
+                        id="clearProfile"
+                        class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition-all duration-300 font-medium button-bounce"
+                    >
+                        🗑️ Clear
+                    </button>
+                </div>
+            </form>
+
+            <!-- Profile Stats -->
+            <div class="mt-8 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">📊 Your Statistics</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="profileTotalTasks">0</div>
+                        <div class="text-sm text-gray-600">Total Tasks</div>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="profileCompletedTasks">0</div>
+                        <div class="text-sm text-gray-600">Completed</div>
+                    </div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="text-2xl font-bold text-yellow-600" id="profileCompletionRate">0%</div>
+                        <div class="text-sm text-gray-600">Success Rate</div>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="profileDaysActive">0</div>
+                        <div class="text-sm text-gray-600">Days Active</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-indigo-800 text-white py-8 mt-12 shadow-inner">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-lg font-semibold mb-2">My To-Do List</p>
+            <p class="text-sm text-indigo-200">© 2025 All rights reserved. Made with ❤️ by Amrutha.</p>
+        </div></footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="text-center">
+                <div class="text-6xl mb-2 bounce">📝</div>
+                <h1 class="text-4xl font-bold text-white mb-2 fade-in">My To-Do List</h1>
+                <p class="text-indigo-100 fade-in">Stay organized and get things done! ✨</p>
+            
+                <!-- User Welcome -->
+                <div id="userWelcome" class="mt-3 text-indigo-100 hidden">
+                    <span class="text-lg">👋</span>
+                    <span id="welcomeMessage">Welcome back!</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-indigo-700 shadow-md">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-center space-x-8 py-4">
+                <a href="index.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg active" onclick="showPage('home')" aria-label="Home">
+                    🏠 Home
+                </a>
+                <a href="about.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg" onclick="showPage('about')" aria-label="About">
+                    ℹ️ About
+                </a>
+                <a href="profile.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg" onclick="showPage('login')" aria-label="Login">
+                    👤 Profile
+                </a>
+                <a href="contact.html" class="nav-link text-white hover:text-indigo-200 transition-all duration-300 font-medium hover-lift px-3 py-1 rounded-lg" onclick="showPage('contact')" aria-label="Contact">
+                    📧 Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
+        <main class="max-w-4xl mx-auto px-4 py-8">
+            
+            <!-- Statistics Dashboard -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="gradient-card rounded-xl shadow-lg p-6 text-center hover-lift">
+                    <div class="text-3xl mb-2">📊</div>
+                    <div class="text-2xl font-bold text-indigo-600" id="totalTasks">0</div>
+                    <div class="text-sm text-gray-600">Total Tasks</div>
+                </div>
+                <div class="gradient-card rounded-xl shadow-lg p-6 text-center hover-lift">
+                    <div class="text-3xl mb-2">✅</div>
+                    <div class="text-2xl font-bold text-green-600" id="completedTasks">0</div>
+                    <div class="text-sm text-gray-600">Completed</div>
+                </div>
+                <div class="gradient-card rounded-xl shadow-lg p-6 text-center hover-lift">
+                    <div class="text-3xl mb-2">⏳</div>
+                    <div class="text-2xl font-bold text-yellow-600" id="pendingTasks">0</div>
+                    <div class="text-sm text-gray-600">Pending</div>
+                </div>
+                <div class="gradient-card rounded-xl shadow-lg p-6 text-center hover-lift">
+                    <div class="text-3xl mb-2">🚨</div>
+                    <div class="text-2xl font-bold text-red-600" id="overdueTasks">0</div>
+                    <div class="text-sm text-gray-600">Overdue</div>
+                </div>
+            </div>
+            <!-- Add Task Form -->
+            <div class="gradient-card rounded-xl shadow-lg p-6 mb-8 hover-lift">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="text-2xl">➕</div>
+                    <h2 class="text-xl font-semibold text-gray-800">Add New Task</h2>
+                </div>
+                <form id="taskForm" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="lg:col-span-2">
+                            <label for="taskName" class="block text-sm font-medium text-gray-700 mb-2">📝 Task Name</label>
+                            <input 
+                                type="text" 
+                                id="taskName" 
+                                name="taskName"
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                                placeholder="What needs to be done? ✨"
+                                required
+                                aria-describedby="taskNameHelp"
+                            >
+                            <div id="taskNameHelp" class="sr-only">Enter the name of your task</div>
+                        </div>
+                        <div>
+                            <label for="priority" class="block text-sm font-medium text-gray-700 mb-2">🎯 Priority</label>
+                            <select 
+                                id="priority" 
+                                name="priority"
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                            >
+                                <option value="low">🟢 Low</option>
+                                <option value="medium" selected>🟡 Medium</option>
+                                <option value="high">🔴 High</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">📂 Category</label>
+                            <select 
+                                id="category" 
+                                name="category"
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                            >
+                                <option value="personal">👤 Personal</option>
+                                <option value="work">💼 Work</option>
+                                <option value="shopping">🛒 Shopping</option>
+                                <option value="health">🏥 Health</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="dueDate" class="block text-sm font-medium text-gray-700 mb-2">📅 Due Date</label>
+                            <input 
+                                type="date" 
+                                id="dueDate" 
+                                name="dueDate"
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                                aria-describedby="dueDateHelp"
+                            >
+                            <div id="dueDateHelp" class="sr-only">Select the due date for your task</div>
+                        </div>
+                        <div>
+                            <label for="dueTime" class="block text-sm font-medium text-gray-700 mb-2">🕐 Due Time</label>
+                            <input 
+                                type="time" 
+                                id="dueTime" 
+                                name="dueTime"
+                                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                                aria-describedby="dueTimeHelp"
+                            >
+                            <div id="dueTimeHelp" class="sr-only">Select the due time for your task</div>
+                        </div>
+                        <div class="flex items-end">
+                            <button 
+                                type="submit" 
+                                class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 font-medium button-bounce hover-lift tooltip"
+                                aria-label="Add new task"
+                                data-tooltip="Add your new task! 🚀"
+                            >
+                                ✨ Add Task
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Search and Filter Controls -->
+            <div class="gradient-card rounded-xl shadow-lg p-6 mb-8 hover-lift">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="text-2xl">🔍</div>
+                    <h3 class="text-lg font-semibold text-gray-800">Search & Filter Tasks</h3>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <label for="searchTasks" class="block text-sm font-medium text-gray-700 mb-2">🔎 Search Tasks</label>
+                    <input 
+                        type="text" 
+                        id="searchTasks" 
+                        placeholder="Search by task name or category... 🔍"
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                    >
+                </div>
+                
+                <!-- Filter and Sort Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Filter Buttons -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-3">📊 Filter by Status</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button 
+                                id="filterAll" 
+                                class="filter-btn bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-all duration-300 font-medium button-bounce tooltip"
+                                aria-label="Show all tasks"
+                                data-tooltip="Show all tasks 📋"
+                            >
+                                📋 All
+                            </button>
+                            <button 
+                                id="filterPending" 
+                                class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-all duration-300 font-medium button-bounce tooltip"
+                                aria-label="Show pending tasks"
+                                data-tooltip="Show pending tasks ⏳"
+                            >
+                                ⏳ Pending
+                            </button>
+                            <button 
+                                id="filterCompleted" 
+                                class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-all duration-300 font-medium button-bounce tooltip"
+                                aria-label="Show completed tasks"
+                                data-tooltip="Show completed tasks ✅"
+                            >
+                                ✅ Done
+                            </button>
+                            <button 
+                                id="filterOverdue" 
+                                class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-all duration-300 font-medium button-bounce tooltip"
+                                aria-label="Show overdue tasks"
+                                data-tooltip="Show overdue tasks 🚨"
+                            >
+                                🚨 Overdue
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sort and Import/Export -->
+                    <div>
+                        <label for="sortTasks" class="block text-sm font-medium text-gray-700 mb-3">🔄 Sort Tasks</label>
+                        <div class="space-y-3">
+                            <select 
+                                id="sortTasks" 
+                                class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                            >
+                                <option value="newest">🆕 Newest First</option>
+                                <option value="oldest">🕰️ Oldest First</option>
+                                <option value="dueDate">📅 Due Date</option>
+                                <option value="priority">🎯 Priority</option>
+                                <option value="alphabetical">🔤 A-Z</option>
+                            </select>
+                            
+                            <!-- Import/Export Buttons -->
+                            <div class="flex gap-2">
+                                <button 
+                                    id="exportTasks" 
+                                    class="flex-1 bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-all duration-300 font-medium button-bounce tooltip text-sm"
+                                    data-tooltip="Export your tasks 📤"
+                                >
+                                    📤 Export
+                                </button>
+                                <button 
+                                    id="importTasks" 
+                                    class="flex-1 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 font-medium button-bounce tooltip text-sm"
+                                    data-tooltip="Import tasks 📥"
+                                >
+                                    📥 Import
+                                </button>
+                                <input type="file" id="importFile" accept=".json" class="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task List -->
+            <div class="gradient-card rounded-xl shadow-lg p-6 hover-lift">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="text-2xl">📋</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Your Tasks</h3>
+                    </div>
+                    <div class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                        <span id="taskCount">0 tasks</span>
+                    </div>
+                </div>
+                <div id="taskList" class="space-y-3" role="list" aria-label="Task list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+                <div id="emptyState" class="text-center py-16 text-gray-500 fade-in">
+                    <div class="text-8xl mb-6 pulse">📝</div>
+                    <p class="text-xl font-medium mb-2">No tasks yet! 🎉</p>
+                    <p class="text-sm mb-4">Ready to be productive? Add your first task above! ✨</p>
+                    <div class="text-4xl">🚀</div>
+                </div>
+            </div>
+        </main>
+    </div>
+  
+    <!-- Edit Modal -->
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 backdrop-blur-sm" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
+        <div class="gradient-card rounded-xl shadow-2xl p-6 w-full max-w-lg mx-4 fade-in hover-lift">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="text-2xl">✏️</div>
+                <h3 id="editModalTitle" class="text-xl font-semibold text-gray-800">Edit Task</h3>
+            </div>
+            <form id="editForm" class="space-y-4">
+                <div>
+                    <label for="editTaskName" class="block text-sm font-medium text-gray-700 mb-2">📝 Task Name</label>
+                    <input 
+                        type="text" 
+                        id="editTaskName" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                        required
+                    >
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="editPriority" class="block text-sm font-medium text-gray-700 mb-2">🎯 Priority</label>
+                        <select 
+                            id="editPriority" 
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                        >
+                            <option value="low">🟢 Low</option>
+                            <option value="medium">🟡 Medium</option>
+                            <option value="high">🔴 High</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="editCategory" class="block text-sm font-medium text-gray-700 mb-2">📂 Category</label>
+                        <select 
+                            id="editCategory" 
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                        >
+                            <option value="personal">👤 Personal</option>
+                            <option value="work">💼 Work</option>
+                            <option value="shopping">🛒 Shopping</option>
+                            <option value="health">🏥 Health</option>
+                            <option value="other">📝 Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="editDueDate" class="block text-sm font-medium text-gray-700 mb-2">📅 Due Date</label>
+                        <input 
+                            type="date" 
+                            id="editDueDate" 
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                        >
+                    </div>
+                    <div>
+                        <label for="editDueTime" class="block text-sm font-medium text-gray-700 mb-2">🕐 Due Time</label>
+                        <input 
+                            type="time" 
+                            id="editDueTime" 
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover-glow"
+                        >
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button 
+                        type="submit" 
+                        class="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-medium button-bounce tooltip"
+                        data-tooltip="Save your changes ✅"
+                    >
+                        ✅ Save Changes
+                    </button>
+                    <button 
+                        type="button" 
+                        id="cancelEdit" 
+                        class="flex-1 bg-gray-200 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-300 transition-all duration-300 font-medium button-bounce tooltip"
+                        data-tooltip="Cancel editing ❌"
+                    >
+                        ❌ Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+   <script src="script.js">   </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9711e727a1163806',t:'MTc1NTUyNTI2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+      <footer class="bg-indigo-800 text-white py-8 mt-12 shadow-inner">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-lg font-semibold mb-2">My To-Do List</p>
+            <p class="text-sm text-indigo-200">© 2025 All rights reserved. Made with ❤️ by Amrutha.</p>
+        </div></footer>
+</body>
+</html>
